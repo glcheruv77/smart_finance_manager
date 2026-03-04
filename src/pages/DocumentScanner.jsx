@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { rewardForScanning } from "../services/rewardService";
+import { rewardForScanning } from "../rewards/rewardService";
 
 const DocumentScanner = () => {
   const [file, setFile] = useState(null);

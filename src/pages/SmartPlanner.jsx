@@ -3,7 +3,7 @@ import {
   rewardForGoalCreation,
   rewardForGoalCompletion,
   rewardForAIUsage
-} from "../services/rewardService";
+} from "../rewards/rewardService";
 
 export default function SmartPlanner() {
   const [goals, setGoals] = useState(

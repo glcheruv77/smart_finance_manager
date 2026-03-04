@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import AppShell from "./layouts/AppShell";
+import Appshell from "./layout/Appshell";
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 export default function App() {
   return (
     <Routes>
-      <Route element={<AppShell />}>
+      <Route element={<Appshell />}>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/budget" element={<BudgetTracker />} />

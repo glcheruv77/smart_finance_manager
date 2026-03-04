@@ -1,94 +1,36 @@
-import RewardCard from "./RewardCard";
-import ProgressBar from "./ProgressBar";
+import { useEffect, useState } from "react";
+import { fetchRewards, fetchRewardSummary } from "../rewards/rewardService";
 
-export default function RewardsContent({
-  user,
-  stats,
-  onRedeem,
-  onChangeUsername
-}) {
+export default function RewardsDashboard({ user }) {
+  const [rewards, setRewards] = useState([]);
+  const [summary, setSummary] = useState(null);
+
+  useEffect(() => {
+    fetchRewards().then(setRewards);
+    fetchRewardSummary().then(setSummary);
+  }, []);
+
   return (
-    <>
-      {/* User Summary */}
-      <div className="card rewards-summary">
-        <div className="rewards-user">
-          <h2>{user.username}</h2>
-          <span
-            className="reward-level"
-            style={{ color: stats.levelColor }}
-          >
-            {user.level}
-          </span>
-        </div>
+    <div>
+      <h2>🏆 Rewards Dashboard</h2>
 
-        <div className="rewards-points">
-          <strong>{user.points}</strong> points
-        </div>
-
-        <ProgressBar
-          value={stats.progress.current}
-          max={stats.progress.max}
-        />
-
-        <small className="next-level">
-          {stats.progress.remaining > 0
-            ? `${stats.progress.remaining} points to next level`
-            : "Max level reached"}
-        </small>
+      <div className="reward-stat">
+        <strong>User</strong>
+        <span>{user?.username ?? "Guest"}</span>
       </div>
 
-      {/* Metrics */}
-      <div className="rewards-grid">
-        <RewardCard
-          title="Badges"
-          value={stats.badgeCount}
-          description="Achievements unlocked"
-        />
-
-        <RewardCard
-          title="Cash Back"
-          value={`$${stats.cashback}`}
-          description="Available to redeem"
-          actionLabel="Redeem"
-          onAction={onRedeem}
-          disabled={user.points < 100}
-        />
-
-        <RewardCard
-          title="Login Streak"
-          value={`${stats.loginStreak} days`}
-          description="Daily activity"
-        />
-
-        <RewardCard
-          title="Scans"
-          value={stats.totalScans}
-          description="Documents processed"
-        />
+      <div className="reward-stat">
+        <strong>Total Points</strong>
+        <span>{summary?.total_points ?? 0}</span>
       </div>
 
-      {/* Badges */}
-      <div className="card">
-        <h3>Badges Earned</h3>
-
-        {user.badges.length === 0 ? (
-          <p className="muted">No badges yet. Keep going.</p>
-        ) : (
-          <ul className="badge-list">
-            {user.badges.map((badge) => (
-              <li key={badge}>🏆 {badge}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      {/* Profile */}
-      <div className="card">
-        <h3>Profile</h3>
-        <button className="secondary-btn" onClick={onChangeUsername}>
-          Change Username
-        </button>
-      </div>
-    </>
+      <ul>
+        {rewards.map((r) => (
+          <li key={r.id}>
+            {r.title} (+{r.points})
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

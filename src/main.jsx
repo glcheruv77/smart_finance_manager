@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import "./styling.css";
+import "./styles/styling.css";
 
 // ✅ Apply saved theme BEFORE React renders (prevents flash)
 const savedTheme = localStorage.getItem("theme");
@@ -17,3 +17,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+console.log("MAIN JSX LOADED");
+

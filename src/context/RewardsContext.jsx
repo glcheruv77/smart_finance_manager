@@ -1,5 +1,5 @@
-import RewardCard from "./RewardCard";
-import ProgressBar from "./ProgressBar";
+import RewardCard from "../components/RewardCard";
+import ProgressBar from "../components/ProgressBar";
 
 export default function RewardsContent({
   user,

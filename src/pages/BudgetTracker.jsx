@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { rewardForTransaction } from "../services/rewardService";
+import { rewardForTransaction } from "../rewards/rewardService";
 
 const BudgetTracker = () => {
   const [transactions, setTransactions] = useState([]);
